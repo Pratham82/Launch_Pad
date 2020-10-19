@@ -8,9 +8,38 @@ import {
   IonThumbnail,
   IonList,
   IonImg,
+  IonIcon,
+  IonButton,
+  IonText,
 } from "@ionic/react";
+import {
+  chevronUpCircleOutline,
+  personCircleOutline,
+  timeOutline,
+  caretUp,
+} from "ionicons/icons";
+import UserContext from "../../contexts/UserContext";
+import productService from "../../services/product";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import "./ProductItem.css";
 
-const ProductItem = ({ product, url, browser }) => {
+const ProductItem = ({ product, url, history, browser }) => {
+  const { user } = React.useContext(UserContext);
+  const addUpvote = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    productService.addUpvote(user, product.id).catch(() => {
+      history.push("/login");
+    });
+  };
+
+  const ifLiked = () => {
+    const currentUser = user && user.uid;
+    const likedArr = product.votes.map((v) => v.votedBy.id);
+    const result = likedArr.includes(currentUser);
+    return result;
+  };
+
   return (
     <IonCard routerLink={url} onClick={browser} button>
       <IonCardContent class="ion-no-padding">
@@ -27,7 +56,67 @@ const ProductItem = ({ product, url, browser }) => {
               <div className="ion-text-wrap" style={{ fontSize: "0.8rem" }}>
                 {product.description}
               </div>
+              <p
+                style={{
+                  alignItems: "center",
+                  fontSize: "0.8rem",
+                  fontWeight: "normal",
+                }}
+              >
+                <IonIcon
+                  icon={chevronUpCircleOutline}
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                />{" "}
+                <IonText
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {product.voteCount} points
+                </IonText>
+                {" | "}
+                <IonIcon
+                  icon={personCircleOutline}
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                />{" "}
+                <IonText
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {product.postedBy.name}
+                </IonText>
+                {" | "}
+                <IonIcon
+                  icon={timeOutline}
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                />{" "}
+                <IonText
+                  style={{
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {formatDistanceToNow(product.created)}
+                </IonText>
+              </p>
             </IonLabel>
+            <IonButton
+              slot="end"
+              onClick={addUpvote}
+              size="large"
+              disabled={ifLiked() === true}
+            >
+              <div className="upvote-button__inner">
+                <IonIcon icon={caretUp} />
+                {product.voteCount}
+              </div>
+            </IonButton>
           </IonItem>
         </IonList>
       </IonCardContent>

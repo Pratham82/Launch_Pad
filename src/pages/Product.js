@@ -1,6 +1,14 @@
 import React from "react";
-import { IonPage, IonContent, IonGrid, IonRow, IonCol } from "@ionic/react";
+import {
+  IonPage,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonButton,
+} from "@ionic/react";
 import { closeCircleOutline } from "ionicons/icons";
+import productService from "../services/product";
 
 import firebase from "../firebase";
 import { Plugins } from "@capacitor/core";
@@ -26,6 +34,17 @@ const Product = (props) => {
     productRef.get().then((doc) => {
       setProduct({ ...doc.data(), id: doc.id });
     });
+  }
+
+  function handleAddVote() {
+    if (!user) {
+      props.history.push("/login");
+    } else {
+      productService
+        .addUpvote(user, productId)
+        .then((newProduct) => setProduct(newProduct))
+        .catch(() => props.history.push("/login"));
+    }
   }
 
   function handleDeleteProduct() {
@@ -66,6 +85,9 @@ const Product = (props) => {
                 <IonCol class="ion-text-center">
                   <ProductItem product={product} browser={openBrowser} />
                   <ProductPhotos photos={product.photos} />
+                  <IonButton onClick={() => handleAddVote()} size="small">
+                    Upvote
+                  </IonButton>
                 </IonCol>
               </IonRow>
             </IonGrid>
