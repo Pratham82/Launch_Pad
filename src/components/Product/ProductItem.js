@@ -14,6 +14,7 @@ import {
 } from "@ionic/react";
 import {
   chevronUpCircleOutline,
+  chatbubbleEllipsesOutline,
   personCircleOutline,
   timeOutline,
   caretUp,
@@ -104,6 +105,26 @@ const ProductItem = ({ product, url, history, browser }) => {
                 >
                   {formatDistanceToNow(product.created)}
                 </IonText>
+                {product.comments.length > 0 && (
+                  <>
+                    {" | "}
+                    <IonIcon
+                      icon={chatbubbleEllipsesOutline}
+                      style={{
+                        verticalAlign: "middle",
+                      }}
+                    />{" "}
+                    <IonText
+                      style={{
+                        verticalAlign: "middle",
+                      }}
+                    >
+                      {product.comments.length === 1
+                        ? `${product.comments.length} comment`
+                        : `${product.comments.length} comments`}
+                    </IonText>
+                  </>
+                )}{" "}
               </p>
             </IonLabel>
             <IonButton
