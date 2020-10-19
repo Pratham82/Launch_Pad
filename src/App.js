@@ -77,7 +77,7 @@ const App = () => {
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
                 <IonIcon icon={listCircleOutline} />
-                <IonLabel>Hunt</IonLabel>
+                <IonLabel>App Hunt</IonLabel>
               </IonTabButton>
               <IonTabButton tab="trending" href="/trending">
                 <IonIcon icon={trendingUpOutline} />
