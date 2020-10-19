@@ -1,13 +1,13 @@
 import React from "react";
 import {
-  IonPage,
   IonContent,
+  IonPage,
   IonItem,
   IonLabel,
   IonInput,
-  IonButton,
   IonRow,
   IonCol,
+  IonButton,
 } from "@ionic/react";
 import useFormValidation from "../hooks/useFormValidation";
 import validateCreateProduct from "../components/Product/validateCreateProduct";
@@ -15,10 +15,10 @@ import firebase from "../firebase";
 import UserContext from "../contexts/UserContext";
 import SmallHeader from "../components/Header/SmallHeader";
 import LargeHeader from "../components/Header/LargeHeader";
-import { toast } from "../utils/toast";
 import Upload from "../components/Form/Upload";
+import { toast } from "../utils/toast";
 
-const INITIIAL_STATE = {
+const INITIAL_STATE = {
   title: "",
   description: "",
   url: "",
@@ -30,7 +30,7 @@ const Submit = ({ history }) => {
   const [thumb, setThumb] = React.useState([]);
   const [photos, setPhotos] = React.useState([]);
   const { handleSubmit, handleChange, values } = useFormValidation(
-    INITIIAL_STATE,
+    INITIAL_STATE,
     validateCreateProduct,
     handleCreate
   );
@@ -113,7 +113,7 @@ const Submit = ({ history }) => {
   return (
     <IonPage>
       <SmallHeader title="Submit" />
-      <IonContent fullscreen>
+      <IonContent>
         <LargeHeader title="Submit" />
         <IonItem lines="full">
           <IonLabel position="floating">Title</IonLabel>
@@ -125,6 +125,7 @@ const Submit = ({ history }) => {
             required
           ></IonInput>
         </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">Description</IonLabel>
           <IonInput
@@ -165,7 +166,6 @@ const Submit = ({ history }) => {
             />
           </IonCol>
         </IonRow>
-
         <IonRow>
           <IonCol>
             <IonButton

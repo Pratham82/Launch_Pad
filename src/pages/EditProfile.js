@@ -2,20 +2,20 @@ import React from "react";
 import {
   IonPage,
   IonContent,
-  IonItem,
-  IonLabel,
-  IonInput,
   IonRow,
   IonCol,
   IonButton,
+  IonItem,
+  IonLabel,
+  IonInput,
   IonLoading,
 } from "@ionic/react";
-import NavHeader from "../components/Header/NavHeader";
-import { toast } from "../utils/toast";
+import firebase from "../firebase";
 import useFormValidation from "../hooks/useFormValidation";
 import validateEditProfile from "../components/Auth/validateEditProfile";
-import firebase from "../firebase";
 import UserContext from "../contexts/UserContext";
+import { toast } from "../utils/toast";
+import NavHeader from "../components/Header/NavHeader";
 
 const EditProfile = (props) => {
   const { user, setUser } = React.useContext(UserContext);
@@ -25,7 +25,6 @@ const EditProfile = (props) => {
     newPassword: "",
     currentPassword: "",
   };
-
   const {
     handleSubmit,
     handleChange,
@@ -33,7 +32,6 @@ const EditProfile = (props) => {
     values,
     isSubmitting,
   } = useFormValidation(INITIAL_STATE, validateEditProfile, authenticateUser);
-
   const [busy, setBusy] = React.useState(false);
 
   async function reauthenticate(email, password) {
@@ -41,12 +39,11 @@ const EditProfile = (props) => {
       email,
       password
     );
-
     try {
       await user.reauthenticateWithCredential(credential);
-      console.log("Reauthentication was Successful !");
+      console.log("Reauthentication Successful");
     } catch (err) {
-      console.log("Profile Update error", err);
+      console.error("Profile Update Error", err);
       toast(err.message);
     }
   }
@@ -55,7 +52,6 @@ const EditProfile = (props) => {
     await user.updateProfile({
       displayName: name,
     });
-
     await user.updateEmail(email);
     if (password) {
       await user.updatePassword(password);
@@ -78,22 +74,20 @@ const EditProfile = (props) => {
         newPassword: "",
         currentPassword: "",
       });
-
       setUser(result.user);
-      toast("You have updated your profile successfully");
+      toast("You have updated your profile successfully.");
       props.history.push("/profile");
     } catch (err) {
-      console.log("Profile Update error", err);
+      console.error("Profile Update Error", err);
       toast(err.message);
     }
-
     setBusy(false);
   }
 
   return (
     <IonPage>
       <NavHeader title="Edit Profile" />
-      <IonLoading message={"Plase wait..."} isOpen={busy} />
+      <IonLoading message={"Please wait..."} isOpen={busy} />
       <IonContent>
         <IonItem lines="full">
           <IonLabel position="floating">Username</IonLabel>
@@ -103,10 +97,9 @@ const EditProfile = (props) => {
             value={values.name}
             onIonChange={handleChange}
             required
-          >
-            {" "}
-          </IonInput>
+          ></IonInput>
         </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">Email</IonLabel>
           <IonInput
@@ -115,10 +108,9 @@ const EditProfile = (props) => {
             value={values.email}
             onIonChange={handleChange}
             required
-          >
-            {" "}
-          </IonInput>
+          ></IonInput>
         </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">New Password</IonLabel>
           <IonInput
@@ -126,11 +118,9 @@ const EditProfile = (props) => {
             type="password"
             value={values.newPassword}
             onIonChange={handleChange}
-            required
-          >
-            {" "}
-          </IonInput>
+          ></IonInput>
         </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">Current Password</IonLabel>
           <IonInput
@@ -141,6 +131,7 @@ const EditProfile = (props) => {
             required
           ></IonInput>
         </IonItem>
+
         <IonRow>
           <IonCol>
             <IonButton
@@ -153,7 +144,7 @@ const EditProfile = (props) => {
               Save
             </IonButton>
           </IonCol>
-        </IonRow>{" "}
+        </IonRow>
       </IonContent>
     </IonPage>
   );

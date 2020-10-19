@@ -1,4 +1,4 @@
-export async function toast(message, duration = 4000) {
+export function toast(message, duration = 4000) {
   const toast = document.createElement("ion-toast");
   toast.message = message;
   toast.duration = duration;

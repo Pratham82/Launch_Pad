@@ -9,16 +9,16 @@ class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
     this.app = app;
+    this.storage = app.storage();
     this.auth = app.auth();
     this.db = app.firestore();
-    this.storage = app.storage();
   }
+
   async register(name, email, password) {
     const newUser = await this.auth.createUserWithEmailAndPassword(
       email,
       password
     );
-
     return newUser.user.updateProfile({
       displayName: name,
     });

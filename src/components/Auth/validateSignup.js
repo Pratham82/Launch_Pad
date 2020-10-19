@@ -1,19 +1,17 @@
 export default function validateSignup(values) {
   let errors = {};
 
-  //Name errors
+  //Name Errors
   if (!values.name) {
-    errors.name = "A user name is required";
+    errors.name = "A username is required.";
   }
-
-  //Email errors
+  // Email Errors
   if (!values.email) {
-    errors.email = "A email  name is required";
+    errors.email = "Your email is required.";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
     errors.email = "Your email is invalid.";
   }
-
-  //Password errors
+  // Password Errors
   if (!values.password) {
     errors.password = "A password is required.";
   } else if (values.password.length < 6) {

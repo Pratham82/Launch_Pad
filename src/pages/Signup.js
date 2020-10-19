@@ -2,19 +2,19 @@ import React from "react";
 import {
   IonPage,
   IonContent,
-  IonItem,
-  IonLabel,
-  IonInput,
   IonRow,
   IonCol,
   IonButton,
+  IonItem,
+  IonLabel,
+  IonInput,
   IonLoading,
 } from "@ionic/react";
-import NavHeader from "../components/Header/NavHeader";
 import { toast } from "../utils/toast";
 import useFormValidation from "../hooks/useFormValidation";
 import validateSignup from "../components/Auth/validateSignup";
 import firebase from "../firebase";
+import NavHeader from "../components/Header/NavHeader";
 
 const INITIAL_STATE = {
   name: "",
@@ -29,19 +29,17 @@ const Signup = (props) => {
     values,
     isSubmitting,
   } = useFormValidation(INITIAL_STATE, validateSignup, authenticateUser);
-
   const [busy, setBusy] = React.useState(false);
 
   async function authenticateUser() {
     setBusy(true);
     const { name, email, password } = values;
-
     try {
       await firebase.register(name, email, password);
-      toast("You have signed up successfully");
+      toast("You have signed up successfully!");
       props.history.push("/");
     } catch (err) {
-      console.log("Authentication error", err);
+      console.error("Authentication Error", err);
       toast(err.message);
     }
     setBusy(false);
@@ -50,7 +48,7 @@ const Signup = (props) => {
   return (
     <IonPage>
       <NavHeader title="Sign Up" />
-      <IonLoading message={"Plase wait..."} isOpen={busy} />
+      <IonLoading message={"Please wait..."} isOpen={busy} />
       <IonContent>
         <IonItem lines="full">
           <IonLabel position="floating">Username</IonLabel>
@@ -60,10 +58,9 @@ const Signup = (props) => {
             value={values.name}
             onIonChange={handleChange}
             required
-          >
-            {" "}
-          </IonInput>
-        </IonItem>{" "}
+          ></IonInput>
+        </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">Email</IonLabel>
           <IonInput
@@ -72,10 +69,9 @@ const Signup = (props) => {
             value={values.email}
             onIonChange={handleChange}
             required
-          >
-            {" "}
-          </IonInput>
+          ></IonInput>
         </IonItem>
+
         <IonItem lines="full">
           <IonLabel position="floating">Password</IonLabel>
           <IonInput
@@ -85,7 +81,8 @@ const Signup = (props) => {
             onIonChange={handleChange}
             required
           ></IonInput>
-        </IonItem>{" "}
+        </IonItem>
+
         <IonRow>
           <IonCol>
             <IonButton

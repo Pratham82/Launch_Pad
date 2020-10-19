@@ -16,6 +16,7 @@ function Upload({ onChange, placeholder, files, multiple, ...rest }) {
         resultType: CameraResultType.DataUrl,
       });
       const blob = dataURItoBlob(image.dataUrl);
+
       onChange([blob]);
     } else {
       onChange([...evt.target.files]);

@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "../utils/toast";
 
-const useFormValidation = (initialState, validate, action) => {
+function useFormValidation(initialState, validate, action) {
   const [values, setValues] = React.useState(initialState);
   const [errors, setErrors] = React.useState({});
   const [isSubmitting, setSubmitting] = React.useState(false);
@@ -18,7 +18,6 @@ const useFormValidation = (initialState, validate, action) => {
         setSubmitting(false);
       }
     }
-
     // eslint-disable-next-line
   }, [errors]);
 
@@ -30,8 +29,8 @@ const useFormValidation = (initialState, validate, action) => {
   }
 
   function handleSubmit() {
-    const validateErrors = validate(values);
-    setErrors(validateErrors);
+    const validationErrors = validate(values);
+    setErrors(validationErrors);
     setSubmitting(true);
   }
 
@@ -42,6 +41,6 @@ const useFormValidation = (initialState, validate, action) => {
     setValues,
     isSubmitting,
   };
-};
+}
 
 export default useFormValidation;

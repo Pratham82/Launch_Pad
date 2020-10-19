@@ -13,5 +13,12 @@ export function dataURItoBlob(dataURI) {
     ia[i] = byteString.charCodeAt(i);
   }
 
+  //Old Code
+  //write the ArrayBuffer to a blob, and you're done
+  //var bb = new BlobBuilder();
+  //bb.append(ab);
+  //return bb.getBlob(mimeString);
+
+  //New Code
   return new Blob([ab], { type: mimeString });
 }

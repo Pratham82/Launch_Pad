@@ -1,28 +1,27 @@
 export default function validateEditProfile(values) {
   let errors = {};
 
-  //Name errors
+  //Name Errors
   if (!values.name) {
-    errors.name = "A user name is required";
+    errors.name = "A username is required.";
   }
-
-  //Email errors
+  // Email Errors
   if (!values.email) {
-    errors.email = "A email  name is required";
+    errors.email = "Your email is required.";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
     errors.email = "Your email is invalid.";
   }
-
-  //Current password
+  // Current Password Errors
   if (!values.currentPassword) {
     errors.currentPassword = "Your current password is required.";
   } else if (values.currentPassword.length < 6) {
-    errors.currentPassword = "Your password must be at least 6 characters.";
+    errors.currentPassword =
+      "Your current password must be at least 6 characters.";
   }
 
-  //New Password
+  // New Password Errors
   if (values.newPassword.length < 6) {
-    errors.newPassword = "Your password must be at least 6 characters.";
+    errors.newPassword = "Your new password must be at least 6 characters.";
   }
 
   return errors;

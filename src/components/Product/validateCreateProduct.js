@@ -1,19 +1,16 @@
 export default function validateCreateProduct(values) {
   let errors = {};
-
-  //Title errors
+  // Title Errors
   if (!values.title) {
     errors.title = "A title is required.";
   }
-
-  //Description errors
+  // Description Errors
   if (!values.description) {
-    errors.description = "A descrption is required";
+    errors.description = "A description is required.";
   } else if (values.description.length < 10) {
     errors.description = "The description must be at least 10 characters.";
   }
-
-  //URL errors
+  // URL Errors
   if (!values.url) {
     errors.url = "A URL required.";
   } else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(values.url)) {

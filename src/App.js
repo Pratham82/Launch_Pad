@@ -2,27 +2,28 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
+  IonIcon,
+  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonIcon,
-  IonLabel,
   IonTabs,
 } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
 import {
   listCircleOutline,
-  createOutline,
   searchOutline,
   personCircleOutline,
+  createOutline,
   trendingUpOutline,
 } from "ionicons/icons";
-import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import Trending from "./pages/Trending";
 import Submit from "./pages/Submit";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Forgot from "./pages/Forgot";
@@ -50,7 +51,6 @@ import "./theme/variables.css";
 
 const App = () => {
   const [user, setUser] = useAuth();
-
   return (
     <IonApp>
       <IonReactRouter>
@@ -71,12 +71,13 @@ const App = () => {
               <Route path="/register" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot" component={Forgot} />
+              <Route path="/product/:productId" component={Product} />
               <Route component={() => <Redirect to="/home" />} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
               <IonTabButton tab="home" href="/home">
                 <IonIcon icon={listCircleOutline} />
-                <IonLabel>App Hunt</IonLabel>
+                <IonLabel>Hunt</IonLabel>
               </IonTabButton>
               <IonTabButton tab="trending" href="/trending">
                 <IonIcon icon={trendingUpOutline} />
@@ -101,5 +102,4 @@ const App = () => {
     </IonApp>
   );
 };
-
 export default App;
