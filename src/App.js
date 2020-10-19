@@ -9,12 +9,6 @@ import {
   IonLabel,
   IonTabs,
 } from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
-import Home from "./pages/Home";
-import Trending from "./pages/Trending";
-import Submit from "./pages/Submit";
-import Search from "./pages/Search";
-import Profile from "./pages/Profile";
 import {
   listCircleOutline,
   createOutline,
@@ -22,6 +16,16 @@ import {
   personCircleOutline,
   trendingUpOutline,
 } from "ionicons/icons";
+import { IonReactRouter } from "@ionic/react-router";
+import Home from "./pages/Home";
+import Trending from "./pages/Trending";
+import Submit from "./pages/Submit";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Forgot from "./pages/Forgot";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -58,6 +62,10 @@ const App = () => {
             <Route path="/submit" component={Submit} />
             <Route path="/search" component={Search} />
             <Route path="/profile" component={Profile} />
+            <Route path="/edit-profile" component={EditProfile} />
+            <Route path="/register" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot" component={Forgot} />
             <Route component={() => <Redirect to="/home" />} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
