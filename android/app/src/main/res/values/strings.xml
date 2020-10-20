@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">App_hunt</string>
+    <string name="title_activity_main">App_hunt</string>
+    <string name="package_name">com.prathamesh.apphunt</string>
+    <string name="custom_url_scheme">com.prathamesh.apphunt</string>
+</resources>
